@@ -21,12 +21,18 @@ class BoardsController < ApplicationController
 
   def update
     authorize board
-    
+
     if @board.update(board_params)
       redirect_to root_path
     else
       render :edit
     end
+  end
+
+  def destroy
+    authorize board
+    @board.destroy
+    redirect_to root_path
   end
 
   private

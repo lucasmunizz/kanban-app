@@ -79,4 +79,15 @@ RSpec.describe "Boards", type: :request do
       end
     end
   end
+
+  describe "DELETE destroy" do
+    context "" do
+      it "its suceed" do
+        board
+        expect do
+          delete board_path(board)
+        end.to change { Board.count }.by(-1)
+      end
+    end
+  end
 end
