@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "Boards", type: :request do
 
   let(:user) { create(:user) }
+  let(:board) { create(:board, user: user)}
 
   before do
     sign_in user
@@ -13,6 +14,14 @@ RSpec.describe "Boards", type: :request do
       get new_board_path
       expect(response).to have_http_status(200)
     end
+  end
+
+  describe "GET edit" do
+    it 'suceeds' do
+      get edit_board_path(board)
+      expect(response).to have_http_status(:success)
+    end
+
   end
 
   describe "POST create" do
