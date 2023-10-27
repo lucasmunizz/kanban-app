@@ -51,4 +51,32 @@ RSpec.describe "Boards", type: :request do
       end
     end
   end
+
+  describe "PUT update" do
+    context "with valid params" do
+      it 'updates the board and redirects' do
+        expect do
+          put board_path(board), params: {
+            board: {
+              name: "Updated board"
+            }
+          }
+        end.to change { board.reload.name}.to("Updated board")
+        expect(response).to have_http_status(:redirect)
+      end
+    end
+
+    context "with invalid params" do
+      it 'not updates the board and not redirect' do
+        expect do
+          put board_path(board), params: {
+            board: {
+              name: ""
+            }
+          }
+        end.not_to change { board.reload.name }
+        expect(response).to have_http_status(:success)
+      end
+    end
+  end
 end
