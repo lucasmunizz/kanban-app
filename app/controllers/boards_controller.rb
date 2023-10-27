@@ -9,6 +9,10 @@ class BoardsController < ApplicationController
     authorize board
   end
 
+  def show
+    authorize board
+  end
+
   def create
     @board = Board.new(board_params.merge(user: current_user))
 

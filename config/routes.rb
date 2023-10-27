@@ -7,5 +7,5 @@ Rails.application.routes.draw do
 
   get "dashboard", to: "dashboard#index"
 
-  resources :boards, only: [:new, :create, :edit, :update, :destroy]
+  resources :boards, only: [:new, :create, :show, :edit, :update, :destroy]
 end

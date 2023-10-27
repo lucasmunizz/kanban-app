@@ -21,7 +21,13 @@ RSpec.describe "Boards", type: :request do
       get edit_board_path(board)
       expect(response).to have_http_status(:success)
     end
+  end
 
+  describe "GET show" do
+    it 'suceeds' do
+      get board_path(board)
+      expect(response).to have_http_status(:success)
+    end
   end
 
   describe "POST create" do
