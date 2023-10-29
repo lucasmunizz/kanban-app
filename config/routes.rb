@@ -8,4 +8,10 @@ Rails.application.routes.draw do
   get "dashboard", to: "dashboard#index"
 
   resources :boards, only: [:new, :create, :show, :edit, :update, :destroy]
+
+  namespace :api do
+    resources :boards do
+      resources :lists, only: :index
+    end
+  end
 end

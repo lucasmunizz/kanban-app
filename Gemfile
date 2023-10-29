@@ -6,6 +6,7 @@ ruby "3.0.0"
 gem "devise"
 gem "rails", "~> 7.0.8"
 gem "sprockets-rails"
+gem 'jsonapi-serializer'
 gem "pundit", "~> 2.3"
 gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
