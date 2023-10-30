@@ -1,7 +1,12 @@
 import { Controller } from "@hotwired/stimulus"
+//import axios from 'axios'
 
 export default class extends Controller {
+  HEADERS = { 'ACCEPT': 'application/json' }
+
   connect() {
+
+    //const axios = require('axios/dist/browser/axios.cjs'); // browser
 
     const boards = [
         {
@@ -87,5 +92,24 @@ export default class extends Controller {
         buttonClick      : function(el, boardId) {},                     // callback when the board's button is clicked
         propagationHandlers: [],                                         // the specified callback does not cancel the browser event. possible values: "click", "context"
     })
+
+
+    //axios.get('/api/boards/1/lists', { headers: this.HEADERS }).then((response) => { console.log(response) })
+
+  fetch('http://localhost:3000/api/boards/1/lists') // Substitua 'https://exemplo.com/api/dados' pela URL da API que você deseja acessar
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Erro na solicitação');
+    }
+    return response.json(); // Converte a resposta para JSON
+  })
+  .then(data => {
+    // Aqui você pode acessar os dados e fazer o que desejar com eles
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('Ocorreu um erro:', error);
+  });
+
   }
 }
