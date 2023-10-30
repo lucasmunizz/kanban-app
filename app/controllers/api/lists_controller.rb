@@ -3,7 +3,7 @@ module Api
         def index
             @lists = board.lists
 
-            render json: ListSerializer.new(@lists).serializable_hash.to_json
+            render json: ListSerializer.new(@lists).serializable_hash
         end
 
         private
