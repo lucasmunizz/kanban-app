@@ -1,6 +1,8 @@
 class ListsController < ApplicationController
     before_action :authenticate_user!
 
+    protect_from_forgery with: :null_session, only: :destroy
+
     def new
       @list = board.lists.new
     end
@@ -26,6 +28,16 @@ class ListsController < ApplicationController
         redirect_to board_path(board)
       else
         render :new
+      end
+    end
+
+    def destroy
+      @list = board.lists.find(params[:id])
+      @list.destroy
+      respond_to do |format|
+        format.json do
+          render json: {}, status: 200
+        end
       end
     end
 

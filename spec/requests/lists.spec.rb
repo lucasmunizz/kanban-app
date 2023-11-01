@@ -79,4 +79,15 @@ RSpec.describe "Lists", type: :request do
       end
     end
   end
+
+  describe "DELETE destroy" do
+    context "" do
+      it "its suceed" do
+        list
+        expect do
+          delete board_list_path(board, list), headers: { 'ACCEPT': 'application/json' }
+        end.to change { List.count }.by(-1)
+      end
+    end
+  end
 end
