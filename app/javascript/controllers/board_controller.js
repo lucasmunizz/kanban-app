@@ -87,6 +87,16 @@ export default class extends Controller {
     return `text-white, ${sample(this.BACKGROUND_COLORS)}`
   }
 
+  updateListPositions(el){
+    axios.put(`${this.element.dataset.listPositionsApiUrl}/${el.dataset.id}`, {
+      position: el.dataset.order - 1
+    }, {
+      headers: this.HEADERS
+    }).then((response) => {
+      console.log(response)
+    })
+  }
+
   buildKanban(boards) {
     new jKanban({
         element: '#board',
@@ -94,14 +104,11 @@ export default class extends Controller {
         itemAddOptions:{
             enabled: true,
         },
+        buttonClick: (el, boardId) => {
+          Turbo.visit(`/lists/${boardId}/items/new`)
+        },
         dragendBoard: (el) => {
-          axios.put(`${this.element.dataset.listPositionsApiUrl}/${el.dataset.id}`, {
-            position: el.dataset.order - 1
-          }, {
-            headers: this.HEADERS
-          }).then((response) => {
-            console.log(response)
-          })
+         this.updateListPositions(el)
         }
     })
   }

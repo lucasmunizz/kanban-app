@@ -1,0 +1,38 @@
+<div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+  <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+    <%= form_with model: [@list, @item], local: true, class: "space-y-8 divide-gray-200" do |f| %>
+    <div class="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
+      <div class="max-w-md mx-auto">
+        <div class="flex items-center space-x-5">
+          <div class="h-14 w-14 bg-yellow-200 rounded-full flex flex-shrink-0 justify-center items-center text-yellow-500 text-2xl font-mono">i</div>
+          <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
+            <% if @item.new_record? %>
+                <h2 class="leading-relaxed">Criar um item</h2>
+                <p class="text-sm text-gray-500 font-normal leading-relaxed">Esse formulário cria um item, por favor preencha os campos.</p>
+            <% else %>
+             <h2 class="leading-relaxed">Editar um item</h2>
+             <p class="text-sm text-gray-500 font-normal leading-relaxed">Esse formulário edita um item, por favor preencha os campos.</p>
+            <% end %>
+          </div>
+        </div>
+        <div class="divide-y divide-gray-200">
+          <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+            <div class="flex flex-col">
+              <%= f.label :title, class: "leading-loos"%>
+              <%= f.text_field :title, class: "px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"%>
+            </div>
+             <div class="flex flex-col">
+              <%= f.label :description, class: "leading-loos"%>
+              <%= f.text_field :description, class: "px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"%>
+            </div>
+           
+          <div class="pt-4 flex items-center space-x-4">
+            <%= link_to "Cancel", root_path, class: "flex justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md focus:outline-none"%>
+            <%= f.submit "Criar", class: "bg-blue-500 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none"%>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
