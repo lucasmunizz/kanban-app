@@ -93,6 +93,15 @@ export default class extends Controller {
         boards: boards,
         itemAddOptions:{
             enabled: true,
+        },
+        dragendBoard: (el) => {
+          axios.put(`${this.element.dataset.apiUrl}/${el.dataset.id}`, {
+            position: el.dataset.order - 1
+          }, {
+            headers: this.HEADERS
+          }).then((response) => {
+            console.log(response)
+          })
         }
     })
   }

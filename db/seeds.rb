@@ -12,9 +12,9 @@ user = User.create(email: "lucas@email.com", password: "123456")
 end
 
 Board.find_each do |board|
-    5.times { |i| List.create(board: board, title: "List #{i + 1}")}
+    3.times { |i| List.create(board: board, title: "List #{i + 1}", position: i)}
 
     board.reload.lists.each do |list|
-        5.times { |i| Item.create(list: list, title: "Item #{i + 1}")}
+        3.times { |i| Item.create(list: list, title: "Item #{i + 1}")}
     end
 end
