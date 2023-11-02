@@ -78,7 +78,8 @@ export default class extends Controller {
         return {
             "id": get(item, 'id'),
             "title": get(item, 'attributes.title'),
-            "class": this.buildClassList()
+            "class": this.buildClassList(),
+            "list-id": get(item, 'attributes.list_id')
         }
     })
   }
@@ -97,6 +98,43 @@ export default class extends Controller {
     })
   }
 
+  buildItemData(items){
+    return map(items, (item) => {
+      return {
+        id: item.dataset.eid,
+        position: item.dataset.position,
+        list_id: item.dataset.listId
+      }
+    })
+  }
+
+  updateItemPositioningApiCall(itemsData){
+    axios.put(this.element.dataset.itemPositionsApiUrl, {
+      items: this.buildItemData(itemsData)
+    }, {
+      headers: this.HEADERS
+    }).then(() => {
+
+    }) 
+  }
+
+  updateItemPositioning(target, source){
+    const targetItems = Array.from(target.getElementsByClassName('kanban-item'))
+    const sourceItems = Array.from(source.getElementsByClassName('kanban-item'))
+
+    targetItems.forEach((item, index) => {
+      item.dataset.position = index;
+      item.dataset.listId = target.closest('.kanban-board').dataset.id
+    })
+
+    sourceItems.forEach((item, index) => {
+      item.dataset.position = index;
+      item.dataset.listId = source.closest('.kanban-board').dataset.id
+    })
+    this.updateItemPositioningApiCall(targetItems)
+    this.updateItemPositioningApiCall(sourceItems)
+  }
+
   buildKanban(boards) {
     new jKanban({
         element: '#board',
@@ -109,7 +147,10 @@ export default class extends Controller {
         },
         dragendBoard: (el) => {
          this.updateListPositions(el)
-        }
+        },
+        dropEl: (el, target, source, sibling) => {
+          this.updateItemPositioning(target, source)
+        },
     })
   }
 }
