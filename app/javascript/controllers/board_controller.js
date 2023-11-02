@@ -135,6 +135,19 @@ export default class extends Controller {
     this.updateItemPositioningApiCall(sourceItems)
   }
 
+  showItemModal(){
+    document.getElementById('show-modal-div').click()
+  }
+
+  populateItemInformation(itemId){
+    axios.get(`/api/items/${itemId}`, {}, { headers: this.HEADERS}).then((response) => {
+      console.log(response)
+
+      document.getElementById('item-title').textContent = get(response, 'data.data.attributes.title')
+      document.getElementById('item-description').textContent = get(response, 'data.data.attributes.description')
+    })
+  }
+
   buildKanban(boards) {
     new jKanban({
         element: '#board',
@@ -143,7 +156,8 @@ export default class extends Controller {
             enabled: true,
         },
         click: (el) => {
-          document.getElementById('show-modal-div').click()
+          this.showItemModal()
+          this.populateItemInformation(el.dataset.eid)
         },
         buttonClick: (el, boardId) => {
           Turbo.visit(`/lists/${boardId}/items/new`)
