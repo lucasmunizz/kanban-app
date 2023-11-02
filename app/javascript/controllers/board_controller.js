@@ -142,6 +142,9 @@ export default class extends Controller {
         itemAddOptions:{
             enabled: true,
         },
+        click: (el) => {
+          document.getElementById('show-modal-div').click()
+        },
         buttonClick: (el, boardId) => {
           Turbo.visit(`/lists/${boardId}/items/new`)
         },

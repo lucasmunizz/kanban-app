@@ -15,3 +15,4 @@ pin "process", to: "https://ga.jspm.io/npm:@jspm/core@2.0.1/nodelibs/browser/pro
 pin "ticky", to: "https://ga.jspm.io/npm:ticky@1.0.1/ticky-browser.js"
 pin "lodash-es", to: "https://ga.jspm.io/npm:lodash-es@4.17.21/lodash.js"
 pin "axios", to: "https://cdn.skypack.dev/axios@1.2.0"
+pin "el-transition", to: "https://ga.jspm.io/npm:el-transition@0.0.7/index.js"
