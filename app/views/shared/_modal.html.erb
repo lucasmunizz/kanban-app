@@ -43,6 +43,11 @@
 
           <p class="font-bold tracking-wide">Description:</p>
           <p id="item-description" class="tracling-wide mb-5"></p>
+
+          <div class="flex">
+            <div><%= link_to "Editar", "", class: "link" ,id: "item-edit-link" %></div>
+            <div class="ml-4"><%= link_to "Deletar", "", class: "link", style: "color: red", color: "text-red-700", id: "item-delete-link" %></div>
+          </div>
         </div>
       </div>
     </div>
