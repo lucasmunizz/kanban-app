@@ -1,6 +1,21 @@
 <div class="mx-auto max-w-7xl px-24 py-12">
     <div data-controller="board" data-board-lists-url="<%= board_lists_path(@board)%>" data-list-positions-api-url="<%= api_board_list_positions_path(@board)%>" data-api-url="<%= api_board_lists_path(@board) %>" data-item-positions-api-url="<%= api_item_positions_path%>" class="mx-auto max-w-4xl" id="board" style="overflow-x: scroll;">
     </div>
-</div>
 
+    <h2> Dashboard </h2>
+
+    <% list_titles = List.pluck(:id, :title).to_h %>
+    <% list_item_counts = Item.group(:list_id).count %>
+    <% list_counts = list_item_counts.transform_keys { |list_id| list_titles[list_id] } %>
+
+    <%= column_chart list_counts  %>
+
+    <% completed_task = Item.where.not(updated_at: nil).group("DATE(updated_at)").count %>
+
+    <% data = completed_task.map { |date, count| { date: date, count: count } } %>
+
+
+    <%= line_chart completed_task %>
+
+</div>
 <%= render "shared/modal" %>

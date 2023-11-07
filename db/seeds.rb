@@ -11,10 +11,10 @@ user = User.create(email: "lucas@email.com", password: "123456")
     Board.create(user: user, name: "Board #{i + 1}")
 end
 
-Board.find_each do |board|
-    3.times { |i| List.create(board: board, title: "List #{i + 1}", position: i)}
+# Board.find_each do |board|
+#     3.times { |i| List.create(board: board, title: "List #{i + 1}", position: i)}
 
-    board.reload.lists.each do |list|
-        5.times { |i| Item.create(list: list, title: "Item #{i + 1}", description: "Description for the item #{i + 1}")}
-    end
-end
+#     board.reload.lists.each do |list|
+#         5.times { |i| Item.create(list: list, title: "Item #{i + 1}", description: "Description for the item #{i + 1}")}
+#     end
+# end
